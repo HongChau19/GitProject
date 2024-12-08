@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Sản Phẩm</title>
+</head>
+<body>
+    <h2>Add New Product</h2>
+    <input type="text" id="txtnewProduct" placeholder="New Product"/>
+    <input type="button" id="addProduct" value="Add" onclick="Add();"/>
+    <script>
+        const products = ["Sony Xperia", "Samsung Galaxy", "Nokia 6", "Xiaomi Redmi Note 4", "Apple iPhone 6S", "Xiaomi Mi 5s Plus", "Apple","iPhone 8 Plus", "Fujitsu F-04R", "Oppo A7a"];
+        function Add() {
+            console.log ("Display On Product");
+            products.forEach((product,index)=> {
+                console.log(`${index + 1}. ${product}`);
+            });
+        }
+
+
+    </script>
+
+
+</body>
+</html>
