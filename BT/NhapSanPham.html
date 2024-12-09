@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sản Phẩm</title>
+    <style>
+        /* tag selector */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+<div id="result"></div>
+    <script>
+        let products = [];
+        function Products(MaSP, TenSP, Gia, Sluong) {
+            this.MaSP= MaSP;
+            this.TenSP = TenSP;
+            this.Gia = Gia;
+            this.Sluong = Sluong;
+        }
+        class product {
+            constructor(MaSP, TenSP, Gia, Sluong) {
+                this.MaSP= MaSP;
+                this.TenSP = TenSP;
+                this.Gia = Gia;
+                this.Sluong = Sluong;
+             }
+        }
+        products.push({
+            MaSP: 'SP001',
+            TenSP: 'Mac Mini M4',
+            Gia: '13500000',
+            Sluong: '99'
+        });
+        function showProductsList(item) {
+            return `<tr>
+            <td>${item.MaSP}</td>
+            <td>${item['TenSP']}</td>
+            <td>${item['Gia']}</td>
+            <td>${item['Sluong']}</td>
+        </tr>`;
+        }
+        const result = document.getElementById("result");
+        let table = '<table><tr><th>Mã Sản phẩm</th><th>Tên Sản phẩm</th><th>Giá</th><th>Số lượng</th></tr>';
+        for (let i = 0; i < products.length; i++) {
+            table += `<tr>
+            <td>${products[i].MaSP}</td>
+            <td>${products[i].TenSP}</td>
+            <td>${products[i]['Gia']}</td>
+            <td>${products[i]['Sluong']}</td>
+        </tr>`;
+        }
+        table += '</table>';
+        result.innerHTML = table;
+        console.log(products);
+    </script>
+
+</body>
+</html>
