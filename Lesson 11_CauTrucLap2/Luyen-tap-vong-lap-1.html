@@ -18,18 +18,82 @@
 
     //Bài 2
 
-    let Nhietdo = prompt("Nhập nhiệt độ hiện tại:");
-    if (Nhietdo > 100) {
-            alert("Vui lòng giảm nhiệt độ.");
-        } else if (Nhietdo < 20) {
-            alert("Vui lòng tăng nhiệt độ.");
-        } else {
-            alert("Nhiệt độ hiện tại là: " + Nhietdo + "°C.");
-        }
-    } else {
-        alert("Bạn đã hủy việc nhập liệu.");
-    }
+    // let nhietDo = prompt("Nhập nhiệt độ hiện tại:");
+    // nhietDo = parseFloat(nhietDo)
+    // if (nhietDo > 100) {
+    //     alert("Vui lòng giảm nhiệt độ.");
+    // } else if (nhietDo < 20) {
+    //     alert("Vui lòng tăng nhiệt độ.");
+    // } else {
+    //     alert("Nhiệt độ hiện tại trong khoảng bình thường.");
+    // }
+
+    //Bài 6
+    // function SoChia7() {
+    //     let sum = 0;
+    //     let count = 0;
+    //     let number = 1;
+    //     while (count < 30) {
+    //         if (number % 7 === 0) { // Kiểm tra nếu số chia hết cho 7
+    //             sum += number;
+    //             count++; // Tăng biến đếm
+    //         }
+    //         number++; // Tăng số tiếp theo
+    //     }
+    //     return sum; // Trả về tổng
+    // }
+    // const totalSum = SoChia7();
+    // console.log("Tổng của 30 số chia hết cho 7 đầu tiên là:", totalSum);
+
+
+    //Bài 7
+    // Lặp từ 0 -> 99 : Lặp 100 lần
+    // let num;
+    // for (num = 1; num <= 100; num++) { // 99 vẫn đúng
+    //     if (num % 3 == 0 && num % 5 !== 0) {
+    //         document.write("Fizz" + "<br>");
+    //         continue;
+    //     } else if (num % 5 == 0 && num % 3 !== 0) {
+    //         document.write("Buzz" + "<br>");
+    //         continue;
+    //     } else if (num % 3 == 0 && num % 5 == 0) {
+    //         document.write("FizzBuzz" + "<br>");
+    //         continue;
+    //     }
+    //     document.write (num + "<br>");
+    // }
 </script>
 
+
+    <button onclick="doanso()">Bắt đầu</button>
+    <script>
+        // Bài 8
+
+    function doanso() {
+        debugger;
+        let number = +prompt("Số bạn muốn đoán trong khoảng lớn nhất là bao nhiêu?")
+        let number_ran = Math.floor(Math.random() * number);
+        console.log(number_ran);
+        let number_check = +prompt ("Nhập số bạn đoán");
+        let count = 0;
+        while (number_check !== number_ran) {
+            count++;
+            if (count == 4) {
+                alert("Bạn hết số lần đoán")
+                break;
+            } else if (number_check < number_ran) {
+                alert("Số bạn đoán bé hơn");
+            } else {
+                alert ("Số bạn đoán lớn hơn")
+            }
+            number_check = prompt ("Nhập số bạn đoán");
+        }
+        if (count == 4) {
+            document.write("Bạn hết số lần đoán")
+        } else {
+            document.write("Bạn đã đoán đúng số. Chúc mừng bạn!")
+        }
+    }
+    </script>
 </body>
 </html>
