@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CaseStudy</title>
+</head>
+<body>
+    <script>
+        //bài 1
+        // function hienThiMang() {
+        // const n = parseInt(prompt("Nhập độ dài mảng (n <= 20):"));
+        //     if (n > 20) {
+        //     alert("Độ dài mảng không được vượt quá 20.");
+        //     return;
+        // }
+        // const arr = [];
+        // for (let i = 0; i < n; i++) {
+        //     const num = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+        //     arr.push(num);
+        // }
+        // alert("Mảng đã nhập: " + arr.join(", "));
+        // // Kiểm tra mảng có phải là mảng tăng dần đều không
+        // let kiemTra = true;
+        // for (let i = 1; i < n; i++) {
+        //     if (arr[i] <= arr[i - 1]) {
+        //         kiemTra = false;
+        //         break;
+        //     }
+        // }
+        // // Hiển thị kết quả
+        // if (kiemTra) {
+        //     alert("OK");
+        // } else {
+        //     alert("NO");
+        // }
+        // }
+        // // Gọi hàm để thực thi
+        // hienThiMang();
+        //bài 2
+        // function checkTriangle(x, y, z) {
+        //     // Kiểm tra xem x, y, z có phải là 3 cạnh của tam giác không
+        //     if (x + y <= z || x + z <= y || y + z <= x) {
+        //         console.log("Không phải cạnh của 1 tam giác");
+        //         return;
+        //     }
+        //     // Kiểm tra tam giác vuông bằng định lý Pythagore
+        //     const sides = [x, y, z].sort((a, b) => a - b); // Sắp xếp để xác định cạnh lớn nhất
+        //     const a = sides[0];
+        //     const b = sides[1];
+        //     const c = sides[2];
+        //
+        //     if (a * a + b * b === c * c) {
+        //         console.log("Là 3 cạnh của tam giác vuông");
+        //     } else {
+        //         console.log("Chỉ là 3 cạnh của một tam giác");
+        //     }
+        // }
+        // checkTriangle(-3, 5, 7)
+        // bài 3
+        // function checkMang () {
+        //     const n = parseInt(prompt("Mảng bạn muốn nhập là:"));
+        //     const array = [];
+        //
+        //     for (let i = 0; i < n; i++) {
+        //         const element = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+        //         array.push(element);
+        //     }
+        //
+        //     document.write("Mảng đã nhập", array);
+        //
+        //     // Kiểm tra tính đối xứng
+        //     const checkDoiXung = array.every((value, index) => value === array[array.length - 1 - index]);
+        //
+        //     // Hiển thị kết quả kiểm tra
+        //     if (checkDoiXung) {
+        //         console.log("OK");
+        //     } else {
+        //         console.log("NO");
+        //     }
+        // }
+        // // Gọi hàm để thực hiện
+        // checkMang();
+
+        //bài 4: viết một hàm truyền vào tham số find(x) Hàm thực hiện kiểm tra. Nếu x không có định dạng là 1 phân số (xx/yy) thì hiển thị "Không phải là phân số". Nếu x là phân số thì tiến hành rút gọn phân số đó về tối giản. Hiển thị phân số tối giản
+
+        // function find(x) {
+        //     // Kiểm tra định dạng phân số
+        //     const regex = /^\d+\/\d+$/; // Định dạng xx/yy
+        //     if (!regex.test(x)) {
+        //         console.log("Không phải là phân số");
+        //         return;
+        //     }
+        //
+        //     // Tách tử và mẫu
+        //     const [numerator, denominator] = x.split('/').map(Number);
+        //
+        //     // Kiểm tra mẫu có phải là 0 không
+        //     if (denominator === 0) {
+        //         console.log("Mẫu số không thể bằng 0");
+        //         return;
+        //     }
+        //
+        //     // Hàm tìm ước số chung lớn nhất (GCD)
+        //     function gcd(a, b) {
+        //         return b === 0 ? a : gcd(b, a % b);
+        //     }
+        //
+        //     // Rút gọn phân số
+        //     const divisor = gcd(numerator, denominator);
+        //     const simplifiedNumerator = numerator / divisor;
+        //     const simplifiedDenominator = denominator / divisor;
+        //
+        //     console.log(`Phân số tối giản: ${simplifiedNumerator}/${simplifiedDenominator}`);
+        // }
+        //
+        // // Ví dụ sử dụng
+        // find("12/8"); // Kết quả: Phân số tối giản: 3/2
+        // find("5/0");  // Kết quả: Mẫu số không thể bằng 0
+        // find("abc");  // Kết quả: Không phải là phân số
+        // find("15/25"); // Kết quả: Phân số tối giản: 3/5
+
+        // bài 5: viết 1 hàm truyền vào tham số findmaxnumber(n). Hàm thực hiện các công việc: Kiểm tra n phải là 1 số có 4 chữ số hay không? Nếu không thỏa mãn là 4 chữ số thì trả về -1. Nếu thỏa mãn là 4 chữ số thì tiếp tục công việc: Tìm ra một số có 3 chữ số từ n (bằng cách xóa đi một chữ số bất kỳ của n) để có được số lơ nhất
+
+        // function findmaxnumber(n) {
+        //     // Kiểm tra n có phải là số 4 chữ số hay không
+        //     if (typeof n !== 'number' || n < 1000 || n > 9999) {
+        //         return -1; // Trả về -1 nếu không phải là số 4 chữ số
+        //     }
+        //
+        //     // Chuyển số thành chuỗi để xử lý
+        //     const strN = n.toString();
+        //     let minNumber = Infinity; // Khởi tạo biến lưu số nhỏ nhất
+        //
+        //     // Duyệt qua từng chữ số để xóa
+        //     for (let i = 0; i < strN.length; i++) {
+        //         // Tạo số mới bằng cách xóa chữ số tại vị trí i
+        //         const newNumber = parseInt(strN.slice(0, i) + strN.slice(i + 1), 10);
+        //         // Cập nhật số nhỏ nhất nếu cần
+        //         if (newNumber < minNumber) {
+        //             minNumber = newNumber;
+        //         }
+        //     }
+        //
+        //     return minNumber; // Trả về số nhỏ nhất tìm được
+        // }
+        //
+        // // Ví dụ sử dụng
+        // console.log(findmaxnumber(1234)); // Kết quả: 124
+        // console.log(findmaxnumber(4321)); // Kết quả: 321
+        // console.log(findmaxnumber(9999)); // Kết quả: 999
+        // console.log(findmaxnumber(123));  // Kết quả: -1
+        // console.log(findmaxnumber(10000)); // Kết quả: -1
+// bài 6: viết hàm với tham số là mảng số nguyên. Hàm thực hiện kiểm tra, nếu mảng chẵn thì trả về 1, mảng lẻ trả về 0, ngược lại nếu không chẵn không lẽ trả về -1
+
+        // function checkArray(arr) {
+        //     // Kiểm tra xem arr có phải là mảng hay không
+        //     if (!Array.isArray(arr)) {
+        //         return -1; // Trả về -1 nếu không phải mảng
+        //     }
+        //     // Biến để theo dõi tính chẵn lẻ
+        //     let allEven = true;
+        //     let allOdd = true;
+        //     // Duyệt qua từng phần tử trong mảng
+        //     for (const num of arr) {
+        //         if (typeof num !== 'number') {
+        //             return -1; // Trả về -1 nếu có phần tử không phải là số
+        //         }
+        //         if (num % 2 === 0) {
+        //             allOdd = false; // Nếu có số chẵn, đánh dấu allOdd là false
+        //         } else {
+        //             allEven = false; // Nếu có số lẻ, đánh dấu allEven là false
+        //         }
+        //     }
+        //
+        //     // Trả về kết quả dựa trên các biến đã đánh dấu
+        //     if (allEven) {
+        //         return 1; // Tất cả số chẵn
+        //     } else if (allOdd) {
+        //         return 0; // Tất cả số lẻ
+        //     } else {
+        //         return -1; // Có cả số chẵn và số lẻ
+        //     }
+        // }
+        //
+        // // Ví dụ sử dụng
+        // console.log(checkArray([2, 4, 6]));      // Kết quả: 1
+        // console.log(checkArray([1, 3, 5]));      // Kết quả: 0
+        // console.log(checkArray([2, 3, 4]));      // Kết quả: -1
+        // console.log(checkArray([2, 'a', 4]));    // Kết quả: -1
+        // console.log(checkArray('not an array')); // Kết quả: -1
+// bài 7: Viết hàm với tham số là mảng ký tự. Hàm thực hiện kiểm tra
+        //Nếu mảng chỉ chứa ký tự số thì trả về 1
+        // Nếu mảng chỉ chứa ký tự chữ [a,b,...z,A,...Z] trả về 0
+        //Ngược lại nếu chứa cả chữ và số trả về -1
+        // function checkArray(arr) {
+        //     // Kiểm tra xem tham số có phải là mảng hay không
+        //     if (!Array.isArray(arr)) {
+        //         throw new Error("Tham số phải là một mảng");
+        //     }
+        //
+        //     let containsNumber = false;
+        //     let containsLetter = false;
+        //
+        //     // Duyệt qua từng ký tự trong mảng
+        //     for (const char of arr) {
+        //         if (typeof char !== 'string' || char.length !== 1) {
+        //             throw new Error("Mỗi phần tử trong mảng phải là một ký tự");
+        //         }
+        //
+        //         // Kiểm tra xem ký tự là số hay chữ
+        //         if (/\d/.test(char)) {
+        //             containsNumber = true;
+        //         } else if (/[a-zA-Z]/.test(char)) {
+        //             containsLetter = true;
+        //         }
+        //     }
+        //
+        //     // Trả về kết quả dựa trên điều kiện
+        //     if (containsNumber && containsLetter) {
+        //         return -1; // Chứa cả chữ và số
+        //     } else if (containsNumber) {
+        //         return 1; // Chỉ chứa ký tự số
+        //     } else if (containsLetter) {
+        //         return 0; // Chỉ chứa ký tự chữ
+        //     } else {
+        //         return -1; // Không chứa ký tự nào
+        //     }
+        // }
+        //
+        // // Ví dụ sử dụng
+        // console.log(checkArray(['1', '2', '3'])); // Kết quả: 1
+        // console.log(checkArray(['a', 'b', 'c'])); // Kết quả: 0
+        // console.log(checkArray(['1', 'a', '3'])); // Kết quả: -1
+        // console.log(checkArray(['A', 'B', 'C'])); // Kết quả: 0
+        // console.log(checkArray([])); // Kết quả: -1
+//bài 8: Viết hàm với tham số là mảng số nguyên. Hàm thực hiện kiểm tra
+        //Nếu mảng chứa toàn bộ các phần tử đều là số nguyên tố thì trả về true, ngược lại trả về false
+        // function isPrime(num) {
+        //     if (num <= 1) return false; // Số nhỏ hơn hoặc bằng 1 không phải là số nguyên tố
+        //     for (let i = 2; i <= Math.sqrt(num); i++) {
+        //         if (num % i === 0) return false; // Nếu chia hết cho i thì không phải là số nguyên tố
+        //     }
+        //     return true; // Nếu không chia hết cho bất kỳ số nào thì là số nguyên tố
+        // }
+        //
+        // function areAllPrime(arr) {
+        //     // Kiểm tra xem tham số có phải là mảng hay không
+        //     if (!Array.isArray(arr)) {
+        //         throw new Error("Tham số phải là một mảng");
+        //     }
+        //
+        //     // Duyệt qua từng phần tử trong mảng
+        //     for (const num of arr) {
+        //         if (!Number.isInteger(num)) {
+        //             throw new Error("Mỗi phần tử trong mảng phải là một số nguyên");
+        //         }
+        //         if (!isPrime(num)) {
+        //             return false; // Nếu có bất kỳ số nào không phải là số nguyên tố, trả về false
+        //         }
+        //     }
+        //
+        //     return true; // Nếu tất cả các số đều là số nguyên tố, trả về true
+        // }
+        //
+        // // Ví dụ sử dụng
+        // console.log(areAllPrime([2, 3, 5, 7])); // Kết quả: true
+        // console.log(areAllPrime([2, 4, 5, 7])); // Kết quả: false
+        // console.log(areAllPrime([11, 13, 17])); // Kết quả: true
+        // console.log(areAllPrime([1, 2, 3])); // Kết quả: false
+        // console.log(areAllPrime([])); // Kết quả: true (mảng rỗng được coi là chứa toàn bộ số nguyên tố)
+
+//bài 9: Nhập 1 mảng từ bàn phím với độ dài n (n là số chẵn)
+        // Hiển thị mảng sau khi thêm mới các phần tử
+        //Kiểm tra mảng vừa nhập:
+        //Nếu các cặp phần ở liền kề nhau (phần tử thứ nhất<phần tử thứ 2) thì hiện thông báo "OK"
+        //Nếu không thỏa mãn thì hiện "NO"
+        function checkAdjacentPairs(arr) {
+            for (let i = 0; i < arr.length - 1; i += 2) {
+                if (arr[i] >= arr[i + 1]) {
+                    return "NO"; // Nếu có cặp không thỏa mãn điều kiện, trả về "NO"
+                }
+            }
+            return "OK"; // Nếu tất cả các cặp đều thỏa mãn, trả về "OK"
+        }
+        function main() {
+            const n = parseInt(prompt("Nhập độ dài mảng (số chẵn):"));
+            // Kiểm tra n có phải là số chẵn hay không
+            if (n % 2 !== 0) {
+                console.log("Vui lòng nhập một số chẵn.");
+                return;
+            }
+            const arr = [];
+            // Nhập các phần tử vào mảng
+            for (let i = 0; i < n; i++) {
+                const element = parseInt(prompt(`Nhập phần tử thứ ${i + 1}:`));
+                arr.push(element);
+            }
+            console.log("Mảng vừa nhập:", arr);
+            // Kiểm tra mảng và hiển thị kết quả
+            const result = checkAdjacentPairs(arr);
+            console.log(result);
+        }
+        // Gọi hàm main để thực thi chương trình
+        main();
+
+//bài 10: Viết 1 hàm truyền vào tham số (với một tham số là chuỗi) checkString(str).
+        // Hàm trả về mảng các ký tự là nguyên âm trong mảng.
+        // Lưu ý mảng trả về không chứa các giá trị trùng lặp và các ký tự in thường và HOA xem như là giống nhau
+
+        // function checkString(str) {
+        //     // Kiểm tra xem tham số có phải là chuỗi hay không
+        //     if (typeof str !== 'string') {
+        //         return []; // Trả về mảng rỗng nếu không phải chuỗi
+        //     }
+        //
+        //     // Định nghĩa các nguyên âm
+        //     const vowels = 'aeiou';
+        //     const foundVowels = new Set(); // Sử dụng Set để loại bỏ trùng lặp
+        //
+        //     // Duyệt qua từng ký tự trong chuỗi
+        //     for (const char of str.toLowerCase()) {
+        //         if (vowels.includes(char)) {
+        //             foundVowels.add(char); // Thêm ký tự nguyên âm vào Set
+        //         }
+        //     }
+        //
+        //     // Chuyển Set thành mảng và trả về
+        //     return Array.from(foundVowels);
+        // }
+        //
+        // // Ví dụ sử dụng
+        // console.log(checkString("Hello World")); // Kết quả: ['e', 'o']
+        // console.log(checkString("Programming")); // Kết quả: ['o', 'a']
+        // console.log(checkString("AEIOUaeiou")); // Kết quả: ['a', 'e', 'i', 'o', 'u']
+        // console.log(checkString("12345")); // Kết quả: []
+        // console.log(checkString("")); // Kết quả: []
+
+// bài 11: Hàm thực hiện kiểm tra
+        // nếu x,y,z không phải 3 cạnh của tam giác thì hiển thị "Không phải là cạnh của tam giác".
+        // Nếu x,y,z là 3 cạnh của tam giác vuông thì hiển thị "Là 3 cạnh của tam giác vuông"
+        // Nếu x,y,z không phải 3 cạnh của tam giác vuông thì hiển thị "chỉ là 3 cạnh của tam giác"
+
+
+        //      function checkTriangleType(x, y, z) {
+        //     // Kiểm tra xem các tham số có phải là số dương hay không
+        //     if (typeof x !== 'number' || typeof y !== 'number' || typeof z !== 'number' || x <= 0 || y <= 0 || z <= 0) {
+        //         console.log("Không phải là cạnh của tam giác");
+        //         return;
+        //     }
+        //
+        //     // Kiểm tra điều kiện tam giác
+        //     if (x + y > z && x + z > y && y + z > x) {
+        //         // Sắp xếp các cạnh để xác định cạnh lớn nhất
+        //         const sides = [x, y, z].sort((a, b) => a - b);
+        //         const a = sides[0];
+        //         const b = sides[1];
+        //         const c = sides[2];
+        //
+        //         // Kiểm tra xem có phải là tam giác vuông không
+        //         if (a * a + b * b === c * c) {
+        //             console.log("Là 3 cạnh của tam giác vuông");
+        //         } else {
+        //             console.log("Chỉ là 3 cạnh của tam giác");
+        //         }
+        //     } else {
+        //         console.log("Không phải là cạnh của tam giác");
+        //     }
+        // }
+        //
+        // // Ví dụ sử dụng
+        // checkTriangleType(3, 4, 5); // Kết quả: Là 3 cạnh của tam giác vuông
+        // checkTriangleType(1, 2, 3); // Kết quả: Không phải là cạnh của tam giác
+        // checkTriangleType(5, 5, 10); // Kết quả: Không phải là cạnh của tam giác
+        // checkTriangleType(6, 8, 10); // Kết quả: Là 3 cạnh của tam giác vuông
+        // checkTriangleType(2, 3, 4); // Kết quả: Chỉ là 3 cạnh của tam giác
+        // checkTriangleType(-1, 2, 3); // Kết quả: Không phải là cạnh của tam giác
+
+
+    </script>
+</body>
+</html>

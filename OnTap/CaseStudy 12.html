@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Học viên CODEGYM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Quản lý Học viên CODEGYM</h1>
+<button onclick="addStudent()">Thêm mới học viên</button>
+<button onclick="editStudent()">Sửa thông tin học viên</button>
+<button onclick="deleteStudent()">Xóa học viên</button>
+<h2>Danh sách học viên</h2>
+<table id="studentTable">
+    <tr>
+        <th>Mã học viên</th>
+        <th>Tên</th>
+        <th>Lớp</th>
+        <th>Email</th>
+        <th>Ngày sinh</th>
+        <th>Module</th>
+    </tr>
+</table>
+
+<script>
+    const students = [];
+
+    function displayStudents() {
+        const table = document.getElementById("studentTable");
+        // Xóa các hàng cũ
+        table.innerHTML = `
+            <tr>
+                <th>Mã học viên</th>
+                <th>Tên</th>
+                <th>Lớp</th>
+                <th>Email</th>
+                <th>Ngày sinh</th>
+                <th>Module</th>
+            </tr>
+        `;
+        students.forEach(student => {
+            const row = table.insertRow();
+            row.insertCell(0).innerText = student.id;
+            row.insertCell(1).innerText = student.name;
+            row.insertCell(2).innerText = student.class;
+            row.insertCell(3).innerText = student.email;
+            row.insertCell(4).innerText = student.birthDate;
+            row.insertCell(5).innerText = student.module;
+        });
+    }
+
+    function addStudent() {
+        const id = prompt("Nhập mã học viên (HV-XXXX):");
+        if (!validateId(id)) {
+            alert("Mã học viên không hợp lệ hoặc đã tồn tại.");
+            return;
+        }
+        const name = prompt("Nhập tên học viên (tối đa 50 ký tự):");
+        if (name.length > 50) {
+            alert("Tên học viên không được quá 50 ký tự.");
+            return;
+        }
+        const className = prompt("Nhập lớp học:");
+        const email = prompt("Nhập email:");
+        const birthDate = prompt("Nhập ngày sinh (dd/mm/yyyy):");
+        if (!validateDate(birthDate)) {
+            alert("Ngày sinh không hợp lệ.");
+            return;
+        }
+        const module = prompt("Nhập module (1-6):");
+        if (!validateModule(module)) {
+            alert("Module không hợp lệ.");
+            return;
+        }
+
+        students.push({ id, name, class: className, email, birthDate, module });
+        displayStudents();
+    }
+
+    function editStudent() {
+        const id = prompt("Nhập mã học viên cần sửa:");
+        const student = students.find(s => s.id === id);
+        if (!student) {
+            alert("Mã học viên không tồn tại.");
+            return;
+        }
+
+        // Cho phép người dùng sửa từng thông tin
+        const newName = prompt("Nhập tên học viên mới (hiện tại: " + student.name + "):", student.name);
+        if (newName.length > 50) {
+            alert("Tên học viên không được quá 50 ký tự.");
+            return;
+        }
+
+        const newClass = prompt("Nhập lớp học mới (hiện tại: " + student.class + "):", student.class);
+        const newEmail = prompt("Nhập email mới (hiện tại: " + student.email + "):", student.email);
+        const newBirthDate = prompt("Nhập ngày sinh mới (dd/mm/yyyy, hiện tại: " + student.birthDate + "):", student.birthDate);
+        if (!validateDate(newBirthDate)) {
+            alert("Ngày sinh không hợp lệ.");
+            return;
+        }
+
+        const newModule = prompt("Nhập module mới (1-6, hiện tại: " + student.module + "):", student.module);
+        if (!validateModule(newModule)) {
+            alert("Module không hợp lệ.");
+            return;
+        }
+
+        // Cập nhật thông tin học viên
+        student.name = newName;
+        student.class = newClass;
+        student.email = newEmail;
+        student.birthDate = newBirthDate;
+        student.module = newModule;
+
+        displayStudents();
+    }
+
+    function deleteStudent() {
+        const id = prompt("Nhập mã học viên cần xóa:");
+        const index = students.findIndex(s => s.id === id);
+        if (index === -1) {
+            alert("Mã học viên không tồn tại.");
+            return;
+        }
+
+        const confirmDelete = confirm("Bạn có chắc chắn muốn xóa học viên này?");
+        if (confirmDelete) {
+            students.splice(index, 1);
+            displayStudents();
+        }
+    }
+
+    function validateId(id) {
+        const regex = /^HV-\d{4}$/;
+        return regex.test(id) && !students.some(s => s.id === id);
+    }
+
+    function validateDate(date) {
+        const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+        return regex.test(date);
+    }
+
+    function validateModule(module) {
+        const num = parseInt(module);
+        return num >= 1 && num <= 6;
+    }
+</script>
+
+</body>
+</html>

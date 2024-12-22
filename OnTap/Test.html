@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý học viên CODEGYM</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Quản lý học viên CODEGYM</h1>
+<button onclick="studentManagement.addStudent()">Thêm mới học viên</button>
+<button onclick="studentManagement.editStudent()">Sửa thông tin học viên</button>
+<button onclick="studentManagement.deleteStudent()">Xóa học viên</button>
+
+<table id="studentTable">
+    <thead>
+    <tr>
+        <th>Mã học viên</th>
+        <th>Tên</th>
+        <th>Lớp</th>
+        <th>Email</th>
+        <th>Ngày sinh</th>
+        <th>Module</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Danh sách học viên sẽ được hiển thị ở đây -->
+    </tbody>
+</table>
+
+<script>
+    class Student {
+        constructor(id, name, className, email, birthDate, module) {
+            this.id = id; // Mã học viên
+            this.name = name; // Tên
+            this.className = className; // Lớp
+            this.email = email; // Email
+            this.birthDate = birthDate; // Ngày sinh
+            this.module = module; // Module
+        }
+    }
+
+    class StudentManagement {
+        constructor() {
+            this.students = [];
+        }
+
+        displayStudents() {
+            const tableBody = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Xóa nội dung cũ
+
+            this.students.forEach(student => {
+                const row = tableBody.insertRow();
+                row.insertCell(0).innerText = student.id;
+                row.insertCell(1).innerText = student.name;
+                row.insertCell(2).innerText = student.className;
+                row.insertCell(3).innerText = student.email;
+                row.insertCell(4).innerText = student.birthDate;
+                row.insertCell(5).innerText = student.module;
+            });
+        }
+
+        addStudent() {
+            const id = prompt("Nhập mã học viên (HV-XXXX):");
+            if (this.isIdUnique(id)) {
+                const name = prompt("Nhập tên học viên (tối đa 50 ký tự):");
+                const className = prompt("Nhập lớp học:");
+                const email = prompt("Nhập email:");
+                const birthDate = prompt("Nhập ngày sinh (dd/mm/yyyy):");
+                const module = prompt("Nhập module (1-6):");
+
+                if (this.validateStudent(id, name, birthDate, module)) {
+                    const student = new Student(id, name, className, email, birthDate, module);
+                    this.students.push(student);
+                    this.displayStudents();
+                }
+            } else {
+                alert("Mã học viên đã tồn tại.");
+            }
+        }
+
+        editStudent() {
+            const id = prompt("Nhập mã học viên cần sửa:");
+            const student = this.students.find(s => s.id === id);
+            if (student) {
+                student.name = prompt("Nhập tên học viên mới:", student.name);
+                student.className = prompt("Nhập lớp học mới:", student.className);
+                student.email = prompt("Nhập email mới:", student.email);
+                student.birthDate = prompt("Nhập ngày sinh mới (dd/mm/yyyy):", student.birthDate);
+                student.module = prompt("Nhập module mới (1-6):", student.module);
+                this.displayStudents();
+            } else {
+                alert("Mã học viên không tồn tại.");
+            }
+        }
+
+        deleteStudent() {
+            const id = prompt("Nhập mã học viên cần xóa:");
+            const index = this.students.findIndex(s => s.id === id);
+            if (index !== -1) {
+                const confirmDelete = confirm("Bạn có chắc chắn muốn xóa học viên này?");
+                if (confirmDelete) {
+                    this.students.splice(index, 1);
+                    this.displayStudents();
+                }
+            } else {
+                alert("Mã học viên không tồn tại.");
+            }
+        }
+
+        isIdUnique(id) {
+            return !this.students.some(s => s.id === id);
+        }
+
+        validateStudent(id, name, birthDate, module) {
+            const idPattern = /^HV-\d{4}$/;
+            const nameValid = name.length <= 50;
+            const moduleValid = module >= 1 && module <= 6;
+            const birthDatePattern = /^\d{2}\/\d{2}\/\d{4}$/;
+
+            if (!idPattern.test(id)) {
+                alert("Mã học viên không hợp lệ.");
+                return false;
+            }
+            if (!nameValid) {
+                alert("Tên học viên không hợp lệ.");
+                return false;
+            }
+            if (!birthDatePattern.test(birthDate)) {
+                alert("Ngày sinh không hợp lệ.");
+                return false;
+            }
+            if (!moduleValid) {
+                alert("Module không hợp lệ.");
+                return false;
+            }
+            return true;
+        }
+    }
+
+    // Khởi tạo hệ thống quản lý học viên
+    const studentManagement = new StudentManagement();
+</script>
+
+</body>
+</html>

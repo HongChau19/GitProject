@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Học Viên CodyGym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+<h1>Quản lý Học viên CODEGYM</h1>
+<button onclick="addHocvien()">Thêm mới học viên</button>
+<button onclick="editHocvien()">Sửa thông tin học viên</button>
+<button onclick="deleteHocvien()">Xóa học viên</button>
+<h2>Danh sách học viên</h2>
+<div id="listHocvien"></div>
+<script>
+    let hocvien = [];
+    function HocVien(MaHV, TenHV, Lop, Email, NgaySinh, Module) {
+        this.MaHV= MaHV;
+        this.TenHV = TenHV;
+        this.Lop = Lop;
+        this.email = Email;
+        this.NgaySinh = NgaySinh;
+        this.Module = Module;
+    }
+    class hocVien {
+        constructor(MaHV, TenHV, Lop, Email, NgaySinh, Module) {
+            this.MaHV= MaHV;
+            this.TenHV = TenHV;
+            this.Lop = Lop;
+            this.email = Email;
+            this. NgaySinh = NgaySinh;
+            this.Module = Module;
+        }
+    }
+
+    function addHocvien() {
+        let mahv = prompt("Nhập mã học viên (HV-XXXX):");
+        if (!/^HV-\d{4}$/.test(mahv) || hocvien.some(hocvien => hocvien.MaHV === MaHV)) {
+            alert("Mã học viên không hợp lệ hoặc đã tồn tại.");
+            return;
+        }
+        let TenHV = prompt("Nhập tên học viên (tối đa 50 ký tự):");
+        if (TenHV.length > 50) {
+            alert("Tên học viên không được quá 50 ký tự.");
+            return;
+        }
+        let Lop = prompt("Nhập lớp học:");
+        let Email = prompt("Nhập email:");
+        let NgaySinh = prompt("Nhập ngày sinh (dd/mm/yyyy):");
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(NgaySinh)) {
+            alert("Ngày sinh không hợp lệ.");
+            return;
+        }
+        let Module = prompt("Nhập module (1-6):");
+        if (module < 1 || module > 6) {
+            alert("Module không hợp lệ.");
+            return;
+        }
+    hocvien.push({ mahv: MaHV, TenHV, Lop, Email, NgaySinh, Module });
+    showHocvien();
+    }
+
+    function showHocvien(item) {
+        return `<tr>
+            <td>${item.MaHV}</td>
+            <td>${item['TenHV']}</td>
+            <td>${item['Lop']}</td>
+            <td>${item['Email']}</td>
+            <td>${item['NgaySinh']}</td>
+            <td>${item['Module']}</td>
+        </tr>`;
+    }
+    const result = document.getElementById("listHocvien");
+
+    let table = '<table><tr><th>Mã Học Viên</th><th>Tên Học Viên</th><th>Lớp</th><th>Email</th><th>Ngày Sinh</th><th>Module</th></tr>';
+    for (let i = 0; i < hocvien.length; i++) {
+        table += `<tr>
+            <td>${hocvien[i].MaHV}</td>
+            <td>${hocvien[i].TenHV}</td>
+            <td>${hocvien[i]['Lop']}</td>
+            <td>${hocvien[i]['Email']}</td>
+            <td>${hocvien[i]['NgaySinh']}</td>
+            <td>${hocvien[i]['Module']}</td>
+        </tr>`;
+    }
+    table += '</table>';
+    result.innerHTML = table;
+    console.log(hocvien);
+</script>
+</body>
+</html>
