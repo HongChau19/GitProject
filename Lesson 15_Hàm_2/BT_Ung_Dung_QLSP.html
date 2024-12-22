@@ -2,24 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quản Lý Sản Phẩm</title>
+    <title>Ứng Dụng Quản Lý</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #4CAF50; /* Màu nền */
+            border: none; /* Không có viền */
+            color: white; /* Màu chữ */
+            padding: 10px 20px; /* Khoảng cách bên trong */
+            text-align: center; /* Canh giữa chữ */
+            text-decoration: none; /* Không gạch chân */
+            display: inline-block; /* Hiển thị inline-block */
+            font-size: 10px; /* Kích thước chữ */
+            margin: 4px 2px; /* Khoảng cách giữa các nút */
+            cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+            border-radius: 5px; /* Bo tròn góc */
+            transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
+        }
+    </style>
 </head>
 <body>
-    <h2>Add New Product</h2>
-    <input type="text" id="txtnewProduct" placeholder="New Product"/>
-    <input type="button" id="addProduct" value="Add" onclick="Add();"/>
-    <script>
-        const products = ["Sony Xperia", "Samsung Galaxy", "Nokia 6", "Xiaomi Redmi Note 4", "Apple iPhone 6S", "Xiaomi Mi 5s Plus", "Apple","iPhone 8 Plus", "Fujitsu F-04R", "Oppo A7a"];
-        function Add() {
-            console.log ("Display On Product");
-            products.forEach((product,index)=> {
-                console.log(`${index + 1}. ${product}`);
-            });
+<h2>Add New Product</h2>
+<input type="text" id="newProductInput" placeholder="New Product" value="">
+<button id="addButton" onclick="addOrEditProduct()">Add</button>
+
+<h2>Display All Product</h2>
+<table id="lable">
+    <tr>
+        <th>Product Name</th>
+        <th style="text-align: center" ><div id="totalProducts">0 sản phẩm</div></th>
+    </tr>
+</table>
+<table id="productTable">
+    <thead>
+    </thead>
+    <tbody id="productTableBody"></tbody>
+</table>
+
+
+<script>
+    let products = [];
+    let editingIndex = -1;
+
+    function displayProducts() {
+        const productTableBody = document.getElementById('productTableBody');
+        productTableBody.innerHTML = '';
+
+        for (let i = 0; i < products.length; i++) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td onclick="editProduct(${i})" style="cursor: pointer;">${products[i]}</td>
+              <td><button onclick="editProduct(${i})">Edit</button></td>
+              <td><button onclick="deleteProduct(${i})">Delete</button></td>
+            `;
+            productTableBody.appendChild(row);
         }
+        updateTotalProducts(); // Cập nhật tổng số sản phẩm
+    }
 
+    function addOrEditProduct() {
+        const newProductInput = document.getElementById('newProductInput');
+        const newProduct = newProductInput.value.trim();
+        if (newProduct !== '') {
+            if (editingIndex === -1) {
+                // Thêm sản phẩm mới
+                products.push(newProduct);
+                alert('Sản phẩm đã được thêm thành công!');
+            } else {
+                // Cập nhật sản phẩm đã sửa
+                products[editingIndex] = newProduct;
+                alert('Sản phẩm đã được cập nhật thành công!');
+                editingIndex = -1; // Đặt lại chỉ số chỉnh sửa
+            }
+            newProductInput.value = ''; // Xóa ô nhập
+            displayProducts(); // Hiển thị danh sách sản phẩm
+        }
+    }
 
-    </script>
+    function editProduct(index) {
+        editingIndex = index;
+        const editProductInput = document.getElementById('newProductInput');
+        editProductInput.value = products[index]; // Hiển thị tên sản phẩm trong ô nhập
+    }
 
+    function deleteProduct(index) {
+        products.splice(index, 1);
+        displayProducts();
+        alert('Sản phẩm đã được xoá thành công!');
+    }
+    function updateTotalProducts() {
+        const totalProductsDiv = document.getElementById('totalProducts');
+        totalProductsDiv.textContent = `${products.length} sản phẩm`;
+    }
 
+    displayProducts();
+</script>
 </body>
 </html>
